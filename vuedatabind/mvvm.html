@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>mvvm test</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div id="myapp">
+		<input type="text" v-model="someStr">
+		<input type="text" v-model="child.someStr">
+		<p>{{getHelloWorld}}</p>
+		<p v-html="htmlStr"></p>
+		<button v-on:click="clickBtn">change model</button>
+	</div>
+	<script src="./Observer.js"></script>
+	<script src="./Watcher.js"></script>
+	<script src="./Compiler.js"></script>
+	<script src="./MVVM.js"></script>
+	<script>
+		var vm = new MVVM({
+			el: '#myapp',
+			data: {
+				someStr: 'hello',
+				className: 'btn',
+				htmlStr: '<span style="color: #f00;">red</span>',
+				child: {
+					someStr: 'Micheal!'
+				}
+			},
+
+			computed: {
+				getHelloWorld: function() {
+					return this.someStr + ' ' + this.child.someStr
+				}
+			},
+
+			methods: {
+				clickBtn: function(e) {
+					var randomStrArr = ['childOne', 'childTwo', 'childThree']
+					this.child.someStr = randomStrArr[parseInt(Math.random() * 3)]
+				}
+			}
+		})
+
+		vm.$watch('child.someStr', function() {
+			console.log(arguments);
+		})
+	</script>
+</body>
+</html>
