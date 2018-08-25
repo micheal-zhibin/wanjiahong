@@ -1,0 +1,19 @@
+{
+	"entry": "./src/index.js",
+	"html": {
+		"template": "./src/index.template.ejs"
+	},
+	"disableCSSModules": true,
+	"sass": {
+		"file": "./src/css/index.scss"
+	},
+	"env": {
+		"development": {
+			"process.env.NODE_ENV": "development"
+		},
+		"build": {
+			"process.env.NODE_ENV": "production"
+		}
+	},
+	"hash": true
+}
